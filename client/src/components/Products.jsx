@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { popularProducts } from '../data';
 import Product from './Product';
 import axios from "axios";
 
 const Products = ({cat, filters, sort}) => {
+    // console.log(cat, filters, sort);
+
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -13,7 +14,7 @@ const Products = ({cat, filters, sort}) => {
             try {
                 const res = await axios.get(
                     cat
-                    ? `http://localhost:5000/api/products?category=${cat}`              //get all products in a categrory
+                    ? `http://localhost:5000/api/products?category=${cat}`              //get all products with a category query
                     : "http://localhost:5000/api/products"                              //get all products
                 );
                 setProducts(res.data);
@@ -30,6 +31,7 @@ const Products = ({cat, filters, sort}) => {
             setFilteredProducts((prev) => 
                 [...prev].sort((a,b) => a.createdAt - b.createdAt)                  
             );
+            
         } else if (sort === "asc") {                                                    
             setFilteredProducts((prev) => 
             [...prev].sort((a,b) => a.price - b.price)                  
@@ -46,7 +48,7 @@ const Products = ({cat, filters, sort}) => {
         cat &&
             setFilteredProducts(
                 products.filter((item) =>
-                    Object.entries(filters).every(([key, value]) =>
+                    Object.entries(filters).every(([key, value]) =>         //displays only products with matching key&value pairs with the filters object
                         item[key].includes(value)
                     )
                 )
@@ -60,7 +62,7 @@ const Products = ({cat, filters, sort}) => {
         <Container>
             {cat
                 ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
-                : products.slice(0, 8).map((item) => <Product item={item} key={item.id} />)}
+                : products.slice(0, 8).map((item) => <Product item={item} key={item.id} />)}           
         </Container>
     );
 };
