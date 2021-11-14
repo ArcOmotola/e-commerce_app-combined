@@ -5,6 +5,7 @@ import Product from './pages/Product';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+import Success from './pages/Success';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 const App = () => {
@@ -25,6 +26,9 @@ const App = () => {
           </Route>
           <Route path="/cart">
             <Cart />
+          </Route>
+          <Route path="/success">
+            <Success />
           </Route>
           <Route path="/login">
             { user ? <Redirect to="/"/> : <Login />}

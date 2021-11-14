@@ -1,14 +1,43 @@
 import { Add, Remove } from '@material-ui/icons';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Announcement from '../components/Announcement';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { mobile } from '../responsive';
+import StripeCheckout from 'react-stripe-checkout';
+import { userRequest } from '../requestMethods';
+import { useHistory } from 'react-router';
+
+const KEY = process.env.REACT_APP_STRIPE;
+console.log("KEY>>>",KEY);
 
 const Cart = () => {
     const cart = useSelector(state=>state.cart);
+    const [stripeToken, setStripeToken] = useState(null);
+    const history = useHistory();
+
+    const onToken = (token) => {
+        setStripeToken(token);
+    }
+
+    console.log("token>>>", stripeToken);
+
+    useEffect(() => {
+        const makeRequest = async () => {
+            try {
+                const res = await userRequest.post("/checkout/payment", {              //process payment route
+                    tokenId: stripeToken.id,                                           //stripeToken is an object, but we need only the Id here
+                    amount: 500,
+                })
+                history.push("/success", {data: res.data});                            //load data from the request process to use on the Success page
+            } catch {
+
+            }
+        };
+        stripeToken && makeRequest();                                                  //makes payment request only when there's access token
+    }, [stripeToken, cart.total, history]);                                            //because by default, access token is not generated until you process a checkout process
 
     return (
         <Container>
@@ -27,6 +56,7 @@ const Cart = () => {
                 <Bottom>
                     <Info>
                         {cart.products.map( product => (
+                        <>
                         <Product>
                             <ProductDetail>
                                 <Image  src={product.img}/>
@@ -45,9 +75,12 @@ const Cart = () => {
                                 </ProductAmountContainer>
                                 <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
                             </PriceDetail>
+                            
                         </Product>
-                        ))}
                         <Hr />
+                        </>
+                        ))}
+                        
                     </Info>
                     <Summary>
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
@@ -67,7 +100,18 @@ const Cart = () => {
                             <SummaryItemText>Total</SummaryItemText>
                             <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
                         </SummaryItem>
-                        <Button>CHECKOUT NOW</Button>
+                        <StripeCheckout 
+                            name="Quantum Store"
+                            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQfzbtfv6ADRy6X9oy40fePXpdlyzH4tyQfQ&usqp=CAU"
+                            billingAddress
+                            shippingAddress
+                            description ={`Your total is $ ${cart.total}`}
+                            amount={cart.total*100}
+                            token={onToken}
+                            stripeKey={KEY}
+                        >
+                            <Button>CHECKOUT NOW</Button>
+                        </StripeCheckout>
                     </Summary>
                 </Bottom>
             </Wrapper>
