@@ -9,7 +9,7 @@ import { mobile } from '../responsive';
 import { useLocation } from 'react-router-dom';
 import { publicRequest } from '../requestMethods';
 import { useDispatch } from 'react-redux';
-import { addProduct } from '../redux/cartRedux';
+import { addProduct } from '../redux/cartSlice';
 
 
 const Product = () => {
