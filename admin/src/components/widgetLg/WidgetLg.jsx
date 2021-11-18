@@ -32,7 +32,7 @@ export const WidgetLg = () => {
                     <th className="widgetLgTh">Status</th>
                 </tr>
                 {orders.map(order => (
-                    <tr className="widgetLgTr">
+                    <tr className="widgetLgTr" key={order._id}>
                         <td className="widgetLgUser">
                             <span className="widgetLgName">{order.userId}</span>
                         </td>
