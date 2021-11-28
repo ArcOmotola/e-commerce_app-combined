@@ -36,7 +36,7 @@ export const Home = () => {
                 res.data.map((item) => 
                     setUserStats((prev) => [
                         ...prev,
-                        { name: MONTHS[item._id - 1], "Active User": item.total },
+                        { name: MONTHS[item._id - 1], "Active User": item.total },           //converts individual id fetched from stats data object to month
                     ])
                 );
             } catch {}
@@ -44,7 +44,6 @@ export const Home = () => {
         getStats();
     }, [MONTHS]);
 
-    console.log(userStats);
 
     return (
         <div className="home">

@@ -4,6 +4,7 @@ import { LineChart, Line, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } f
 
 export const Chart = ({title, data, dataKey, grid}) => {
     
+    console.log("chart>>>",data)
 
     return (
         <div className="chart">

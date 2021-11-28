@@ -1,21 +1,21 @@
 export const sliderItems = [
     {
         id: 1,
-        img: "https://image.freepik.com/free-photo/happy-shopper-woman-summer-dress-with-shopping-bags-holding-credit-card_8353-6975.jpg",
+        img: "https://i.ibb.co/K9yG0YD/output-onlinegiftools.gif",
         title: "SUMMER SALE",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "f5fafd",
     },
     {
         id: 2,
-        img: "https://image.freepik.com/free-photo/happy-shopper-woman-summer-dress-with-shopping-bags-holding-credit-card_8353-6975.jpg",
+        img: "https://images.squarespace-cdn.com/content/v1/56395456e4b07eafb4ab2b46/1493688463347-UHB60QYW63R5554Y2DGL/Simms-360-Shoe-Photography.gif?format=500w",
         title: "AUTUMN COLLECTION",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "fcf1ed",
     },
     {
         id: 3,
-        img: "https://image.freepik.com/free-photo/happy-shopper-woman-summer-dress-with-shopping-bags-holding-credit-card_8353-6975.jpg",
+        img: "https://i.pinimg.com/originals/83/af/9d/83af9d34aed07fe41561d49e9d7ae203.gif",
         title: "LOUNGEWEAR LOVE",
         desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
         bg: "fbf0f4",
