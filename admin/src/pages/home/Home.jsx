@@ -33,7 +33,10 @@ export const Home = () => {
         const getStats = async () => {
             try {
                 const res = await userRequest.get("/users/stats");
-                res.data.map((item) => 
+                const list = res.data.sort((a,b) => {
+                    return a._id - b._id
+                })                                                                          //sorts returning data
+                list.map((item) => 
                     setUserStats((prev) => [
                         ...prev,
                         { name: MONTHS[item._id - 1], "Active User": item.total },           //converts individual id fetched from stats data object to month
